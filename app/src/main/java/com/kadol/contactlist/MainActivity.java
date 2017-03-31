@@ -2,6 +2,8 @@ package com.kadol.contactlist;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -11,7 +13,10 @@ public class MainActivity extends AppCompatActivity {
 
     DataBaseHelper dataBaseHelper;
 
+    Button loadMore;
+
     int numberOfTimesLoadButtonClicked=0;
+    ListView listView;
 
     ArrayList<Contact> contactList=new ArrayList<>();
 
@@ -30,11 +35,31 @@ public class MainActivity extends AppCompatActivity {
 
         contactList=dataBaseHelper.GroupContact();
 
-        ListView listView=(ListView) findViewById(R.id.list);
+        listView=(ListView) findViewById(R.id.list);
 
         contactAdapter=new ContactAdapter(this,fillingUpTheList());
 
         listView.setAdapter(contactAdapter);
+
+        loadMore=(Button) findViewById(R.id.load_more_button);
+
+        loadMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberOfTimesLoadButtonClicked++;
+
+                int startPoint=numberOfTimesLoadButtonClicked*10;
+
+                if(startPoint>contactList.size()){
+                    loadMore.setText("No More Result to Show");
+                    loadMore.setEnabled(false);
+                }else{
+
+                    contactAdapter=new ContactAdapter(getApplicationContext(),fillingUpTheList());
+                    listView.setAdapter(contactAdapter);
+                }
+            }
+        });
 
 
 
@@ -68,10 +93,17 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Contact> fillingUpTheList(){
         int startPoint=numberOfTimesLoadButtonClicked*10;
+
+        if(startPoint>contactList.size()){
+            loadMore.setText("No More Result to Show");
+            loadMore.setEnabled(false);
+
+        }
+
         int endPoint=startPoint+10;
 
         if(endPoint>contactList.size()){
-            endPoint=contactList.size()-1;
+            endPoint=contactList.size();
         }
 
         List<Contact> subListOf10= contactList.subList(startPoint,endPoint);
