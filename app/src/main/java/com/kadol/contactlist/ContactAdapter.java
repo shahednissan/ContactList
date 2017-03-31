@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by Nafi on 3/31/2017.
- */
-
 public class ContactAdapter extends ArrayAdapter<Contact> {
         public ContactAdapter(Context context, List<Contact> contactList) {
         super(context, 0, contactList);

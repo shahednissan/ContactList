@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Checking the length of the username and deciding whether we need to use double line or not
         TextView userName=(TextView) findViewById(R.id.textView_user_name);
         String name=userName.getText().toString();
         if(name.length()>16){
@@ -35,18 +36,23 @@ public class MainActivity extends AppCompatActivity {
         }
         userName.setText(name);
 
+        //Creating the Database.
         dataBaseHelper=new DataBaseHelper(this);
 
+        //Deleting the old Database as it is a demo app.
         dataBaseHelper.onDelete();
 
+        //Inserting the element to the database (static elements)
         insertDatabase();
 
+        //calling out whole contacts table at once and saving all the contact information on a ArrayList
         contactList=dataBaseHelper.GroupContact();
 
         listView=(ListView) findViewById(R.id.list);
 
         contactAdapter=new ContactAdapter(this,fillingUpTheList());
 
+        //Populating the first ten contacts to the ListView
         listView.setAdapter(contactAdapter);
 
         loadMore=(Button) findViewById(R.id.load_more_button);
@@ -59,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 int startPoint=numberOfTimesLoadButtonClicked*10;
 
                 if(startPoint>contactList.size()){
+
+                    //Checking whether there is any contacts left to show or not
+
                     loadMore.setText("No More Result to Show");
                     loadMore.setEnabled(false);
                 }else{
 
+                    //Contacts left to show
                     contactAdapter=new ContactAdapter(getApplicationContext(),fillingUpTheList());
                     listView.setAdapter(contactAdapter);
                 }
@@ -114,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             endPoint=contactList.size();
         }
 
+        //creating subList from the main Contact list
         List<Contact> subListOf10= contactList.subList(startPoint,endPoint);
 
         return  subListOf10;

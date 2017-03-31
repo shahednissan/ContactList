@@ -1,8 +1,5 @@
 package com.kadol.contactlist;
 
-/**
- * Created by Nafi on 3/31/2017.
- */
 
 public class Contact {
 

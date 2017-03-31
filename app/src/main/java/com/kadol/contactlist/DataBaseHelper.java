@@ -8,10 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-/**
- * Created by Nafi on 3/31/2017.
- */
-
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "ContactDatabase.db";
@@ -42,6 +38,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void onDelete() {
+        //Deleting the Database as it will help me to debug
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS contacts");
         onCreate(db);
@@ -67,7 +64,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while(res.isAfterLast()==false){
-            String id=res.getString(res.getColumnIndex(DataBaseHelper.CONTACTS_COLUMN_ID));
+
             String name=res.getString(res.getColumnIndex(DataBaseHelper.CONTACTS_COLUMN_NAME));
             String number=res.getString(res.getColumnIndex(DataBaseHelper.CONTACTS_COLUMN_PHONE));
 
