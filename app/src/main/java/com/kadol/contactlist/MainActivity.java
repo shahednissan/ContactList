@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView userName=(TextView) findViewById(R.id.textView_user_name);
+        String name=userName.getText().toString();
+        if(name.length()>16){
+            name=name.substring(0,16)+"\n"+name.substring(16,name.length());
+        }
+        userName.setText(name);
 
         dataBaseHelper=new DataBaseHelper(this);
 
