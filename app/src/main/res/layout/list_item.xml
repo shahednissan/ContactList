@@ -6,8 +6,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:src="@drawable/ic_shortcut_account_circle"
         android:scaleType="fitCenter"
         />
@@ -25,7 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="bottom"
+            android:textSize="18sp"
             tools:text="Aabbb"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             />
 
@@ -35,6 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:text="0123456898"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             />
 
