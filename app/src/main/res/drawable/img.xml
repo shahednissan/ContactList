@@ -3,7 +3,12 @@
 
     <item android:drawable="@mipmap/ic_launcher"
         />
+
+
     <item android:drawable="@drawable/circle"
         />
+
+
+    <item android:drawable="@drawable/newrectangle"/>
 
 </layer-list>
